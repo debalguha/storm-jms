@@ -10,16 +10,15 @@ import javax.jms.Message;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 
-import backtype.storm.topology.base.BaseRichBolt;
 import org.apache.storm.jms.JmsMessageProducer;
 import org.apache.storm.jms.JmsProvider;
+import org.apache.storm.task.OutputCollector;
+import org.apache.storm.task.TopologyContext;
+import org.apache.storm.topology.OutputFieldsDeclarer;
+import org.apache.storm.topology.base.BaseRichBolt;
+import org.apache.storm.tuple.Tuple;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import backtype.storm.task.OutputCollector;
-import backtype.storm.task.TopologyContext;
-import backtype.storm.topology.OutputFieldsDeclarer;
-import backtype.storm.tuple.Tuple;
 
 /**
  * A JmsBolt receives <code>backtype.storm.tuple.Tuple</code> objects from a Storm
@@ -47,6 +46,7 @@ import backtype.storm.tuple.Tuple;
  * @author P. Taylor Goetz
  *
  */
+@SuppressWarnings("serial")
 public class JmsBolt extends BaseRichBolt {
 	private static Logger LOG = LoggerFactory.getLogger(JmsBolt.class);
 	
@@ -178,7 +178,7 @@ public class JmsBolt extends BaseRichBolt {
 	 * Initializes JMS resources.
 	 */
 	@Override
-	public void prepare(Map stormConf, TopologyContext context,
+	public void prepare(@SuppressWarnings("rawtypes") Map stormConf, TopologyContext context,
 			OutputCollector collector) {
 		if(this.jmsProvider == null || this.producer == null){
 			throw new IllegalStateException("JMS Provider and MessageProducer not set.");

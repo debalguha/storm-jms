@@ -1,12 +1,12 @@
 package org.apache.storm.jms.trident;
 
-import backtype.storm.tuple.Tuple;
-import storm.trident.tuple.TridentTuple;
+import java.io.Serializable;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
-import java.io.Serializable;
+
+import org.apache.storm.trident.tuple.TridentTuple;
 
 public interface TridentJmsMessageProducer extends Serializable{
 

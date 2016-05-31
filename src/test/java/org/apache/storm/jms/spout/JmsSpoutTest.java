@@ -30,12 +30,11 @@ import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
+import org.apache.storm.jms.JmsProvider;
+import org.apache.storm.shade.org.eclipse.jetty.util.log.Log;
+import org.apache.storm.spout.SpoutOutputCollector;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mortbay.log.Log;
-
-import org.apache.storm.jms.JmsProvider;
-import backtype.storm.spout.SpoutOutputCollector;
 
 public class JmsSpoutTest {
     @Test
@@ -72,7 +71,8 @@ public class JmsSpoutTest {
         Assert.assertTrue(out.toByteArray().length > 0);
     }
     
-    public Message sendMessage(ConnectionFactory connectionFactory, Destination destination) throws JMSException {        
+    @SuppressWarnings("deprecation")
+	public Message sendMessage(ConnectionFactory connectionFactory, Destination destination) throws JMSException {        
         Session mySess = connectionFactory.createConnection().createSession(false, Session.CLIENT_ACKNOWLEDGE);
         MessageProducer producer = mySess.createProducer(destination);
         TextMessage msg = mySess.createTextMessage();

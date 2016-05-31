@@ -17,12 +17,13 @@
  */
 package org.apache.storm.jms.trident;
 
-import backtype.storm.task.IMetricsContext;
-import storm.trident.state.State;
-import storm.trident.state.StateFactory;
-
 import java.util.Map;
 
+import org.apache.storm.task.IMetricsContext;
+import org.apache.storm.trident.state.State;
+import org.apache.storm.trident.state.StateFactory;
+
+@SuppressWarnings("serial")
 public class JmsStateFactory implements StateFactory {
 
     private JmsState.Options options;
@@ -32,7 +33,7 @@ public class JmsStateFactory implements StateFactory {
     }
 
     @Override
-    public State makeState(Map map, IMetricsContext iMetricsContext, int partitionIndex, int numPartitions) {
+    public State makeState(@SuppressWarnings("rawtypes") Map map, IMetricsContext iMetricsContext, int partitionIndex, int numPartitions) {
         JmsState state = new JmsState(options);
         state.prepare();
         return state;

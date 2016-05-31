@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * Created by tgoetz on 7/14/14.
  */
+@SuppressWarnings("serial")
 public class JmsMessageID implements Comparable<JmsMessageID>, Serializable {
 
     private String jmsID;
